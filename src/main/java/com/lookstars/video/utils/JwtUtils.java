@@ -32,7 +32,7 @@ public class JwtUtils {
 
     public static Claims checkJWT(String token){
         try {
-            Claims claims = Jwts.parser().setSigningKey(APPSECRET).parseClaimsJws(token).getBody();
+            Claims claims =  Jwts.parser().setSigningKey(APPSECRET).parseClaimsJws(token).getBody();
             return claims;
         }catch (Exception e){
             System.out.println(e);

@@ -1,7 +1,9 @@
 package com.lookstars.video.controller;
 
+import ch.qos.logback.core.encoder.EchoEncoder;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.lookstars.video.domain.JsonData;
 import com.lookstars.video.domain.Video;
 import com.lookstars.video.service.VideoService;
 import org.apache.ibatis.annotations.Delete;
@@ -39,8 +41,16 @@ public class VideoController {
     }
 
     @DeleteMapping("delById")
-    public Object delById(@RequestParam(value = "video_id",required = true)int videoId){
-        return videoService.delete(videoId);
+    public JsonData delById(@RequestParam(value = "video_id",required = true)int videoId){
+
+        try{
+            videoService.delete(videoId);
+            return JsonData.buildSuccess(videoId);
+        }catch (Exception e){
+            return JsonData.buildError(e.getMessage());
+        }
+
+
     }
 
 

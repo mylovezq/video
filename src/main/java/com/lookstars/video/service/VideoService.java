@@ -1,9 +1,7 @@
 package com.lookstars.video.service;
 
 import com.lookstars.video.domain.Video;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+
 
 import java.util.List;
 

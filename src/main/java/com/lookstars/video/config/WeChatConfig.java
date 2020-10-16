@@ -12,24 +12,40 @@ import org.springframework.context.annotation.PropertySource;
 public class WeChatConfig {
 
     @Value("${wxpay.appid}")
-    private String appId;
+    private  String appId;
 
     @Value("${wxpay.appsecret}")
-    private String appsecret;
+    private  String appsecret;
+
+    @Value("${wxpay.redirect_url}")
+    private String redirectUrl;
+
+
+    /**
+     * 微信公众号二维码连接
+     */
+
+    private final static String OFFICIAL_ACCOUNTS_AUTHORIZE = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_userinfo&state=%s#wechat_redirect";
+    private final static String GET_QRCODE_URL="https://open.weixin.qq.com/connect/qrconnect?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_login&state=%s#wechat_redirect";
+
+
 
     public String getAppId() {
         return appId;
-    }
-
-    public void setAppId(String appId) {
-        this.appId = appId;
     }
 
     public String getAppsecret() {
         return appsecret;
     }
 
-    public void setAppsecret(String appsecret) {
-        this.appsecret = appsecret;
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+    public static String getGetQrcodeUrl() {
+        return GET_QRCODE_URL;
+    }
+
+    public static String getOfficialAccountsAuthorize() {
+        return OFFICIAL_ACCOUNTS_AUTHORIZE;
     }
 }
