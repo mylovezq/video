@@ -9,9 +9,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.lookstars.video.config.WeChatConfig;
 import com.lookstars.video.domain.JsonData;
+import com.lookstars.video.domain.User;
+import com.lookstars.video.service.UserService;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.ByteArrayRequestEntity;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -23,10 +26,7 @@ import org.dom4j.io.SAXReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 ;
 
 import com.google.gson.Gson;
@@ -37,9 +37,10 @@ public class WechatController {
 
     @Autowired
     private WeChatConfig weChatConfig;
-
-
+    @Autowired
+    private UserService userService;
     private static final Gson gson = new Gson();
+
     /***
      * httpClient-Get请求
      * @param url 请求地址
@@ -91,21 +92,24 @@ public class WechatController {
     // 生成带参数的二维码，自动登录网站
     @RequestMapping("getLoginUrl")
     public JsonData wechatMpLogin(@RequestParam String access_page) throws Exception {
-        String encodeRedirectUrl = URLEncoder.encode(weChatConfig.getRedirectUrl(),"GBK");
-        String createQrcodeUrl = String.format(weChatConfig.getGetQrcodeUrl(),weChatConfig.getAppId(),encodeRedirectUrl,access_page);
+        String encodeRedirectUrl = URLEncoder.encode(weChatConfig.getRedirectUrl(), "GBK");
+        String createQrcodeUrl = String.format(weChatConfig.getGetQrcodeUrl(), weChatConfig.getAppId(), encodeRedirectUrl, access_page);
         return JsonData.buildSuccess(createQrcodeUrl);
     }
 
     @RequestMapping("getWechatAuth")
     public JsonData getWechatAuth(@RequestParam String access_page) throws Exception {
-        String encodeRedirectUrl = URLEncoder.encode(weChatConfig.getRedirectUrl(),"GBK");
-        String createQrcodeUrl = String.format(weChatConfig.getOfficialAccountsAuthorize(),weChatConfig.getAppId(),encodeRedirectUrl,access_page);
+        String encodeRedirectUrl = URLEncoder.encode(weChatConfig.getRedirectUrl(), "GBK");
+        String createQrcodeUrl = String.format(weChatConfig.getOfficialAccountsAuthorize(), weChatConfig.getAppId(), encodeRedirectUrl, access_page);
         return JsonData.buildSuccess(createQrcodeUrl);
     }
 
-    @RequestMapping("callback")
-    public JsonData callback(HttpServletRequest httpServletRequest) throws Exception {
-        return JsonData.buildSuccess("is ok!!");
+    @GetMapping("userCallback")
+    public void callback(@RequestParam String code, String state, HttpServletResponse httpServletResponse) throws Exception {
+        User user = userService.saveWeChatUser(code);
+        if (user != null) {
+            //生产jwt
+        }
     }
 
 }

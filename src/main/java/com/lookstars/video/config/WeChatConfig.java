@@ -28,7 +28,9 @@ public class WeChatConfig {
     private final static String OFFICIAL_ACCOUNTS_AUTHORIZE = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_userinfo&state=%s#wechat_redirect";
     private final static String GET_QRCODE_URL="https://open.weixin.qq.com/connect/qrconnect?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_login&state=%s#wechat_redirect";
 
+    private final static String GET_ACCESS_TOKEN ="https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
 
+    private final static String GET_USER_INFO = "https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN";
 
     public String getAppId() {
         return appId;
@@ -47,5 +49,13 @@ public class WeChatConfig {
 
     public static String getOfficialAccountsAuthorize() {
         return OFFICIAL_ACCOUNTS_AUTHORIZE;
+    }
+
+    public static String getGetAccessToken() {
+        return GET_ACCESS_TOKEN;
+    }
+
+    public static String getGetUserInfo() {
+        return GET_USER_INFO;
     }
 }

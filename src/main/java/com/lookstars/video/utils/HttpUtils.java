@@ -7,10 +7,10 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
+
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-import sun.net.www.http.HttpClient;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +36,9 @@ public class HttpUtils {
             HttpResponse httpResponse = httpClient.execute(httpGet);
             if (httpResponse.getStatusLine().getStatusCode() == 200) {
                 String jsonResult = EntityUtils.toString(httpResponse.getEntity());
-                map = gson.fromJson(jsonResult, map.getClass());
+                String json = new String(jsonResult.getBytes("ISO-8859-1"), "UTF-8");
+                System.out.println(json);
+                map = gson.fromJson(json, map.getClass());
             }
 
         }catch (Exception e){

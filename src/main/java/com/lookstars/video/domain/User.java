@@ -1,5 +1,7 @@
 package com.lookstars.video.domain;
 
+import java.util.Date;
+
 /**
  * 用户实体类
  */
@@ -11,10 +13,13 @@ public class User {
   private String headImg;
   private String phone;
   private String sign;
-  private Integer sex;
+  private String sex;
   private String city;
-  private java.sql.Timestamp createTime;
+  private String province;
+  private String country;
+  private Date createTime;
 
+  private String finalAddress;
 
   public Integer getId() {
     return id;
@@ -70,11 +75,11 @@ public class User {
   }
 
 
-  public Integer getSex() {
+  public String getSex() {
     return sex;
   }
 
-  public void setSex(Integer sex) {
+  public void setSex(String sex) {
     this.sex = sex;
   }
 
@@ -88,12 +93,35 @@ public class User {
   }
 
 
-  public java.sql.Timestamp getCreateTime() {
+  public Date getCreateTime() {
     return createTime;
   }
 
-  public void setCreateTime(java.sql.Timestamp createTime) {
+  public void setCreateTime(Date createTime) {
     this.createTime = createTime;
   }
 
+  public String getProvince() {
+    return province;
+  }
+
+  public void setProvince(String province) {
+    this.province = province;
+  }
+
+  public String getCountry() {
+    return country;
+  }
+
+  public void setCountry(String country) {
+    this.country = country;
+  }
+
+  public String getFinalAddress() {
+    return finalAddress;
+  }
+
+  public void setFinalAddress(String finalAddress) {
+    this.finalAddress = finalAddress;
+  }
 }
