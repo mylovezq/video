@@ -15,6 +15,8 @@ import com.lookstars.video.config.WeChatConfig;
 import com.lookstars.video.domain.JsonData;
 import com.lookstars.video.domain.User;
 import com.lookstars.video.service.UserService;
+import com.lookstars.video.utils.JwtUtils;
+import io.jsonwebtoken.Claims;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.ByteArrayRequestEntity;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -109,7 +111,13 @@ public class WechatController {
         User user = userService.saveWeChatUser(code);
         if (user != null) {
             //生产jwt
+            String token = JwtUtils.geneJsonWebToken(user);
+            httpServletResponse.sendRedirect(state+"?token="+token+"&head_img="+user.getHeadImg()+"&name="+user.getName());
+
+
         }
+
+
     }
 
 }
