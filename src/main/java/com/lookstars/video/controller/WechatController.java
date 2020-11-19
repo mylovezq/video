@@ -94,17 +94,11 @@ public class WechatController {
     // 生成带参数的二维码，自动登录网站
     @RequestMapping("getLoginUrl")
     public JsonData wechatMpLogin(@RequestParam String access_page) throws Exception {
-        String encodeRedirectUrl = URLEncoder.encode(weChatConfig.getRedirectUrl(), "GBK");
-        String createQrcodeUrl = String.format(weChatConfig.getGetQrcodeUrl(), weChatConfig.getAppId(), encodeRedirectUrl, access_page);
+        String encodeRedirectUrl = URLEncoder.encode(weChatConfig.getOpenRedirectUrl(), "GBK");
+        String createQrcodeUrl = String.format(WeChatConfig.getOpenQrcodeUrl(), weChatConfig.getOpenAppId(), encodeRedirectUrl, access_page);
         return JsonData.buildSuccess(createQrcodeUrl);
     }
 
-    @RequestMapping("getWechatAuth")
-    public JsonData getWechatAuth(@RequestParam String access_page) throws Exception {
-        String encodeRedirectUrl = URLEncoder.encode(weChatConfig.getRedirectUrl(), "GBK");
-        String createQrcodeUrl = String.format(weChatConfig.getOfficialAccountsAuthorize(), weChatConfig.getAppId(), encodeRedirectUrl, access_page);
-        return JsonData.buildSuccess(createQrcodeUrl);
-    }
 
     @GetMapping("userCallback")
     public void callback(@RequestParam String code, String state, HttpServletResponse httpServletResponse) throws Exception {

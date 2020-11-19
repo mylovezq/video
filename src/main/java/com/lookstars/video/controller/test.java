@@ -23,12 +23,7 @@ public class test {
         return "hell world,mylovezqd 夜空中最的啊啊亮的星！可以很强";
     }
 
-    @GetMapping(value = "testConfig")
-    public String testConfig(){
-
-        return "hello" + weChatConfig.getAppId()+"-----"+weChatConfig.getAppsecret();
-    }
-
+    
     @GetMapping(value = "findAll")
     public Object findAll(){
 

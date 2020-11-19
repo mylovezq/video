@@ -11,51 +11,55 @@ import org.springframework.context.annotation.PropertySource;
 @PropertySource(value = "classpath:application.properties")
 public class WeChatConfig {
 
-    @Value("${wxpay.appid}")
-    private  String appId;
+    @Value("${open.appid}")
+    private  String openAppId;
 
-    @Value("${wxpay.appsecret}")
-    private  String appsecret;
+    @Value("${open.appsecret}")
+    private  String openAppSecret;
 
-    @Value("${wxpay.redirect_url}")
-    private String redirectUrl;
+    @Value("${open.redirect_url}")
+    private String openRedirectUrl;
 
-
+    private String accessToken;
     /**
      * 微信公众号二维码连接
      */
 
-    private final static String OFFICIAL_ACCOUNTS_AUTHORIZE = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_userinfo&state=%s#wechat_redirect";
-    private final static String GET_QRCODE_URL="https://open.weixin.qq.com/connect/qrconnect?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_login&state=%s#wechat_redirect";
+    private final static String OPEN_QRCODE_URL = "https://open.weixin.qq.com/connect/qrconnect?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_login&state=%s#wechat_redirect";
 
-    private final static String GET_ACCESS_TOKEN ="https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
-
-    private final static String GET_USER_INFO = "https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN";
-
-    public String getAppId() {
-        return appId;
+    public String getOpenAppId() {
+        return openAppId;
     }
 
-    public String getAppsecret() {
-        return appsecret;
+    public void setOpenAppId(String openAppId) {
+        this.openAppId = openAppId;
     }
 
-    public String getRedirectUrl() {
-        return redirectUrl;
-    }
-    public static String getGetQrcodeUrl() {
-        return GET_QRCODE_URL;
+    public String getOpenAppSecret() {
+        return openAppSecret;
     }
 
-    public static String getOfficialAccountsAuthorize() {
-        return OFFICIAL_ACCOUNTS_AUTHORIZE;
+    public void setOpenAppSecret(String openAppSecret) {
+        this.openAppSecret = openAppSecret;
     }
 
-    public static String getGetAccessToken() {
-        return GET_ACCESS_TOKEN;
+    public String getOpenRedirectUrl() {
+        return openRedirectUrl;
     }
 
-    public static String getGetUserInfo() {
-        return GET_USER_INFO;
+    public void setOpenRedirectUrl(String openRedirectUrl) {
+        this.openRedirectUrl = openRedirectUrl;
+    }
+
+    public static String getOpenQrcodeUrl() {
+        return OPEN_QRCODE_URL;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 }
