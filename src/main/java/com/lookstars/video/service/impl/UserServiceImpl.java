@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Override
     public User saveWeChatUser(String code) {
-        String accessTokenUrl = String.format(weChatConfig.getAccessToken(), weChatConfig.getOpenAppId(), weChatConfig.getOpenAppSecret(), code);
+        String accessTokenUrl = String.format(WeChatConfig.getOpenAccessTokenUrl(), weChatConfig.getOpenAppId(), weChatConfig.getOpenAppSecret(), code);
         Map<String, Object> baseMap = HttpUtils.doGet(accessTokenUrl);
         if (CollectionUtils.isEmpty(baseMap)) return null;
         //获取accessToken
@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
               return byOpenid;
          }
         //通过accessToken 获取用户信息
-        String userInfoUrl = String.format(accessToken, openid);
+        String userInfoUrl = String.format(WeChatConfig.getOpenAccessUserInfoUrl(),accessToken, openid);
         Map<String, Object> userInfoMap = HttpUtils.doGet(userInfoUrl);
         if (CollectionUtils.isEmpty(userInfoMap)) return null;
 

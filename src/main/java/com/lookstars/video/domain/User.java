@@ -124,4 +124,5 @@ public class User {
   public void setFinalAddress(String finalAddress) {
     this.finalAddress = finalAddress;
   }
+  
 }

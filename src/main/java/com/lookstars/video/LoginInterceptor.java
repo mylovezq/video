@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.jar.JarEntry;
 
 public class LoginInterceptor implements HandlerInterceptor {
     private static final Gson gson = new Gson();

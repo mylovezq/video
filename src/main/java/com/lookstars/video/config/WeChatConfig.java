@@ -20,12 +20,17 @@ public class WeChatConfig {
     @Value("${open.redirect_url}")
     private String openRedirectUrl;
 
-    private String accessToken;
+
+
     /**
      * 微信公众号二维码连接
      */
 
     private final static String OPEN_QRCODE_URL = "https://open.weixin.qq.com/connect/qrconnect?appid=%s&redirect_uri=%s&response_type=code&scope=snsapi_login&state=%s#wechat_redirect";
+
+    private final static String OPEN_ACCESS_TOKEN_URL="https://api.weixin.qq.com/sns/oauth2/access_token?appid=%s&secret=%s&code=%s&grant_type=authorization_code";
+
+    private final static String OPEN_ACCESS_USER_INFO_URL="https://api.weixin.qq.com/sns/userinfo?access_token=%s&openid=%s&lang=zh_CN";
 
     public String getOpenAppId() {
         return openAppId;
@@ -55,11 +60,11 @@ public class WeChatConfig {
         return OPEN_QRCODE_URL;
     }
 
-    public String getAccessToken() {
-        return accessToken;
+    public static String getOpenAccessTokenUrl() {
+        return OPEN_ACCESS_TOKEN_URL;
     }
 
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
+    public static String getOpenAccessUserInfoUrl() {
+        return OPEN_ACCESS_USER_INFO_URL;
     }
 }
