@@ -5,6 +5,9 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lookstars.video.domain.JsonData;
 import com.lookstars.video.domain.Video;
+import com.lookstars.video.domain.VideoOrder;
+import com.lookstars.video.mapper.VideoMapper;
+import com.lookstars.video.mapper.VideoOrderMapper;
 import com.lookstars.video.service.VideoService;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +22,8 @@ public class VideoController {
 
     @Autowired
     private VideoService videoService;
-
+    @Autowired
+    VideoOrderMapper videoOrderMapper;
     /**
      * 分页接口
      * @param page 默认第一页
