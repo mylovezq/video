@@ -1,6 +1,7 @@
 package com.lookstars.video.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 订单表
@@ -14,8 +15,8 @@ public class VideoOrder implements Serializable {
    * 0未支付 1已经支付
    */
   private Integer state;
-  private java.sql.Timestamp createTime;
-  private java.sql.Timestamp notifyTime;
+  private Date createTime;
+  private Date notifyTime;
   /**
    * 分为单位
    */
@@ -66,23 +67,22 @@ public class VideoOrder implements Serializable {
   }
 
 
-  public java.sql.Timestamp getCreateTime() {
+  public Date getCreateTime() {
     return createTime;
   }
 
-  public void setCreateTime(java.sql.Timestamp createTime) {
+  public void setCreateTime(Date createTime) {
     this.createTime = createTime;
   }
 
 
-  public java.sql.Timestamp getNotifyTime() {
+  public Date getNotifyTime() {
     return notifyTime;
   }
 
-  public void setNotifyTime(java.sql.Timestamp notifyTime) {
+  public void setNotifyTime(Date notifyTime) {
     this.notifyTime = notifyTime;
   }
-
 
   public Integer getTotalFee() {
     return totalFee;

@@ -55,7 +55,7 @@ public class HttpUtils {
     }
 
 
-    public static Map<String,Object> doPost(String url,String data,int timeOut){
+    public static String doPost(String url,String data,int timeOut){
         Map<String,Object> map = new HashMap<>();
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -76,7 +76,7 @@ public class HttpUtils {
             CloseableHttpResponse response = httpClient.execute(httpPost);
             if (response.getStatusLine().getStatusCode() == 200) {
                 String jsonResult = EntityUtils.toString(response.getEntity());
-                map = gson.fromJson(jsonResult, map.getClass());
+                return jsonResult;
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -89,7 +89,7 @@ public class HttpUtils {
             }
 
         }
-        return map;
+        return null;
     }
 
 }

@@ -31,17 +31,18 @@ public class VideoController {
      * @return
      */
     @GetMapping("page")
-    public Object pageVideo(@RequestParam(value = "page",defaultValue = "1")int page,
+    public JsonData pageVideo(@RequestParam(value = "page",defaultValue = "1")int page,
                             @RequestParam(value = "size",defaultValue = "10")int size){
         PageHelper.startPage(page,size);
         List<Video> all = videoService.findAll();
         PageInfo<Video> pageInfo = new PageInfo<>(all);
-        return pageInfo;
+        return JsonData.buildSuccess(pageInfo.getList());
     }
 
     @GetMapping("findById")
-    public Object findById(@RequestParam(value = "video_id",required = true) int videoId){
-        return videoService.findById(videoId);
+    public JsonData findById(@RequestParam(value = "video_id",required = true) int videoId){
+
+        return JsonData.buildSuccess(videoService.findById(videoId));
     }
 
     @DeleteMapping("delById")
